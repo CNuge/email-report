@@ -35,7 +35,7 @@ def get_mlb_team_score(query_team):
 
 
 
-team = 'Toronto Blue Jays'
+#team = 'Toronto Blue Jays'
 def get_team_result_text(team):
 	yesterday_game = get_mlb_team_score(team)
 	if yesterday_game == 'did not play yesterday':
@@ -43,8 +43,8 @@ def get_team_result_text(team):
 	else:
 		other_team = [z for z in yesterday_game.keys() if z != team][0]
 		team_score = yesterday_game[team]
-		other_team_score = yesterday_game[other_team[0]]
-		if int(team_score) > int(other_team_score):
+		other_team_score = yesterday_game[other_team]
+		if int(team_score) < int(other_team_score):
 			result = 'The %s lost to the %s, %s-%s.' % (team,other_team,other_team_score,team_score)
 			return result
 		else:
