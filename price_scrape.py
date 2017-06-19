@@ -1,6 +1,7 @@
 import urllib
 from urllib.request import urlopen, build_opener
 from bs4 import BeautifulSoup
+import json
 
 
 def get_XPS_13_price():
@@ -21,27 +22,29 @@ def parse_model_name(url_of_page):
 	model_name = product_split.split('/')[0]
 	return model_name
 
-def get_macbook_pro_price(macbook_model_page):
+def get_macbook_pro_price(macbook_model_page, model):
 	#the following line gets the url while handling the cookies
 	mac_data = build_opener(urllib.request.HTTPCookieProcessor).open(macbook_model_page)
 	mac_bsObj = BeautifulSoup(mac_data, 'lxml')
 	#data is within a json object
-	price_of_comp = mac_bsObj.find('span', {'class':'as-price-currentprice'})
-	
-	return price_of_comp.get_text().rstrip().lstrip()
+	price_of_comp = mac_bsObj.find('script', {'type':'application/ld+json'}).get_text()
+	json_dat = json.loads(price_of_comp)
+	for i in json_dat['offers']:
+		if i['sku'] == model:
+			return i['price']
 	
 
 def get_mac_15_price():
 
 	mac_web_15 ='https://www.apple.com/ca_edu_93120/shop/buy-mac/macbook-pro?product=MPTR2LL/A&step=config#'
-	price = get_macbook_pro_price(mac_web_15)
+	price = get_macbook_pro_price(mac_web_15, 'MPTR2LL/A')
 
-	return 'Today the 15 inch Macbook Pro you\'re interested in is %d.\n\tlink: %s' % (price, mac_web_15)
+	return 'Today the 15 inch Macbook Pro you\'re interested in is %s.\n\tlink: %s' % (price, mac_web_15)
 
 def get_mac_13_price():
 
 	mac_web_13 = 'https://www.apple.com/ca_edu_93120/shop/buy-mac/macbook-pro?product=MPXV2LL/A&step=config#'
-	price = get_macbook_pro_price(mac_web_13)
+	price = get_macbook_pro_price(mac_web_13,'MPXV2LL/A')
 
-	return 'Today the 13 inch Macbook Pro you\'re interested in is %d.\n\tlink: %s' % (price, mac_web_13)
+	return 'Today the 13 inch Macbook Pro you\'re interested in is %s.\n\tlink: %s' % (price, mac_web_13)
 
