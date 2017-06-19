@@ -1,21 +1,13 @@
 
-import numpy as np
 from datetime import datetime
-import pandas as pd
-from pandas import Series, DataFrame
+from pandas import DataFrame
 import pandas_datareader.data as web
-import urllib
-from urllib.request import urlopen, build_opener
+from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import json
 
 """ grab stock data for a suite of coumpanies I am interested in
 	take this data and return a few graphs and tables. """
-
-now_time = datetime.now()
-
-start_time = datetime((now.year ), now.month - 1, now.day)
-
 
 #build a list of the stocks you care about
 
@@ -64,6 +56,33 @@ def TSE_last_month_prices(stock):
 	prices = [price.rstrip() for price in prices]
 	outdat = DataFrame(list(zip(dates,prices)),columns = ['Date','Close'])
 	return outdat
+
+
+if __name__ == '__main__':
+
+	now_time = datetime.now()
+
+	start_time = datetime((now.year ), now.month - 1, now.day)
+
+
+
+	stocks_of_interest = ['AMZN','GOOG','AAPL','CLDR','HDP','ORCL','TSLA']
+
+	for stock in stocks_of_interest:
+		get_american_stock_dat(stock,start_time, now_time )
+
+	#above works only for NYSE stocks... need to go to the source for canadian 
+	#ones and scrape the data from the page
+
+
+	canadian_stocks_of_interest = ['BEP.UN','EXE','FC','TXF','XWD','VCN','VFV','VUN']
+
+		
+	stock_prices = []
+	for stock in canadian_stocks_of_interest:
+		now = TSE_current_price(stock)
+		stock_prices.append(now)
+
 
 
 
