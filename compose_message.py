@@ -8,6 +8,7 @@ import stock_data
 import countdowns
 import price_scrape
 import game_scores
+import stock_graph
 from datetime import datetime
 
 def build_email():
@@ -28,15 +29,18 @@ def build_email():
 	jays_game = game_scores.get_team_result_text('Toronto Blue Jays')
 
 
-
+	#to this point all validated as working, make the 
+	#progams to graph the stock dataframes.
+	#then compose the message from everything.
 	now_time = datetime.now()
-	start_time = datetime((now.year ), now.month - 1, now.day)
+	start_time = datetime((now_time.year ), now_time.month - 1, now_time.day)
 
 	stocks_of_interest = ['AMZN','GOOG','AAPL','CLDR','HDP','ORCL','TSLA']
 
 	for stock in stocks_of_interest:
-		get_american_stock_dat(stock,start_time, now_time )
-
+		stock_df = stock_data.get_american_stock_dat(stock,start_time, now_time )
+		#plot the stock df and return the newest
+		graph_of_close = stock_graph.plot_us_stock_data(stock_df, stock)
 	#above works only for NYSE stocks... need to go to the source for canadian 
 	#ones and scrape the data from the page
 
@@ -48,3 +52,12 @@ def build_email():
 		stock_prices.append(now)
 
 		price_df = stock_data.TSE_last_month_prices(stock)
+
+		graph_of_close = stock_graph.plot_cad_stock_data(price_df, stock)
+
+
+
+
+
+
+

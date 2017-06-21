@@ -32,7 +32,6 @@ def get_macbook_pro_price(macbook_model_page, model):
 	for i in json_dat['offers']:
 		if i['sku'] == model:
 			return i['price']
-	
 
 def get_mac_15_price():
 
