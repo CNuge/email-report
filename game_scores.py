@@ -45,10 +45,10 @@ def get_team_result_text(team):
 		team_score = yesterday_game[team]
 		other_team_score = yesterday_game[other_team]
 		if int(team_score) < int(other_team_score):
-			result = 'The %s lost to the %s, %s-%s.' % (team,other_team,other_team_score,team_score)
+			result = 'Yesterday, the %s lost to the %s, %s-%s.' % (team,other_team,other_team_score,team_score)
 			return result
 		else:
-			result = 'The %s beat the %s, %s-%s.' % (team,other_team,team_score,other_team_score)
+			result = 'Yesterday, the %s beat the %s, %s-%s.' % (team,other_team,team_score,other_team_score)
 			return result
 
 

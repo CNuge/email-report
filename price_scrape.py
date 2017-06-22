@@ -15,7 +15,7 @@ def get_XPS_13_price():
 	#grab price from product description
 	price_of_comp = description.find('span', {'class':'price'})
 
-	return 'Today the Dell XPS 13 Developer edition you like is $%s.\n\tlink: %s' % (price_of_comp.get_text(), link)
+	return 'Today the Dell XPS 13 Developer edition you like is $%s.\n\tlink: %s\n' % (price_of_comp.get_text(), link)
 
 def parse_model_name(url_of_page):
 	product_split = url_of_page.split('product=')[1]
@@ -38,12 +38,12 @@ def get_mac_15_price():
 	mac_web_15 ='https://www.apple.com/ca_edu_93120/shop/buy-mac/macbook-pro?product=MPTR2LL/A&step=config#'
 	price = get_macbook_pro_price(mac_web_15, 'MPTR2LL/A')
 
-	return 'Today the 15 inch Macbook Pro you\'re interested in is %s.\n\tlink: %s' % (price, mac_web_15)
+	return 'Today the 15 inch Macbook Pro you\'re interested in is $%s.\n\tlink: %s\n' % (price, mac_web_15)
 
 def get_mac_13_price():
 
 	mac_web_13 = 'https://www.apple.com/ca_edu_93120/shop/buy-mac/macbook-pro?product=MPXV2LL/A&step=config#'
 	price = get_macbook_pro_price(mac_web_13,'MPXV2LL/A')
 
-	return 'Today the 13 inch Macbook Pro you\'re interested in is %s.\n\tlink: %s' % (price, mac_web_13)
+	return 'Today the 13 inch Macbook Pro you\'re interested in is $%s.\n\tlink: %s\n' % (price, mac_web_13)
 

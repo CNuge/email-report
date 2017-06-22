@@ -64,29 +64,33 @@ if __name__ == '__main__':
 
 	start_time = datetime((now.year ), now.month - 1, now.day)
 
-
-
 	stocks_of_interest = ['AMZN','GOOG','AAPL','CLDR','HDP','ORCL','TSLA']
 
 	for stock in stocks_of_interest:
-		get_american_stock_dat(stock,start_time, now_time )
+		#scrape the stock data to a df
+		stock_df = stock_data.get_american_stock_dat(stock,start_time, now_time )
+		#plot the stock df 
+		graph_of_close = stock_graph.plot_us_stock_data(stock_df, stock)
+		#take the plot and add it to the email message
+		graph_to_message_body(graph_of_close, message_body)
 
-	#above works only for NYSE stocks... need to go to the source for canadian 
-	#ones and scrape the data from the page
 
 
 	canadian_stocks_of_interest = ['BEP.UN','EXE','FC','TXF','XWD','VCN','VFV','VUN']
-
-		
+	
 	stock_prices = []
 	for stock in canadian_stocks_of_interest:
-		now = TSE_current_price(stock)
+		now = stock_data.TSE_current_price(stock)
 		stock_prices.append(now)
+		#scrape the stock data to a df
+		price_df = stock_data.TSE_last_month_prices(stock)
+		#plot the stock df 
+		graph_of_close = stock_graph.plot_cad_stock_data(price_df, stock)
+		#take the plot and add it to the email message
+		graph_to_message_body(graph_of_close, message_body)
 
 
-
-
-
+	
 
 
 
