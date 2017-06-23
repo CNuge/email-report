@@ -13,18 +13,15 @@ Things the program does:
 		website doesn't have this info for the TSE ('Download to spreadsheet' link 
 		doesn't exit? why?). So I made the two following functions for canadian stocks:
 
-		TSE_current_price - use the google finance api to just get the current price
-							(if thats all you want or need)
-		google_historical_price_site - scrapes the data from the google finance page
-										and parses it into a dataframe
+		TSE_current_price - use the google finance api to just get the current price (if thats all you want or need).
+		google_historical_price_site - scrapes the data from the google finance page and parses it into a dataframe.
 
 	These data are then graphed by 'stock_graph', and the colour changes depending
 	on if the stock has gained or lost in the last 30 trading days.
 2. price_scrape module looks up the prices of some laptops that I'm interested in,
 	so I can see if they go on sale. note it uses the canadian prices and the 
-	education prices for apple (as I'm a student and need them discounts)
-3. looks up the jays score from yesterday and tells me if they won, lost, or didn't play
-	I'll add hockey functionality come OCT
+	education prices for apple (as I'm a student and need them discounts).
+3. looks up the jays score from yesterday and tells me if they won, lost, or didn't play. I'll add hockey functionality come OCT.
 4. countdowns.py just gives me a few fun facts to start my day.
 
 
