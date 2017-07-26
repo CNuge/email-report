@@ -57,7 +57,7 @@ def create_text_body():
 	return body
 
 
-def graph_to_message_body(graph_data,message_body):
+def graph_to_message_body(graph_data, message_body):
 	#the default is a .png, can't explicitly specify
 	graph_data.save('temp.png')
 
