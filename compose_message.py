@@ -29,7 +29,7 @@ def create_text_body():
 
 	jays_game = game_scores.get_team_result_text('Toronto Blue Jays')
 
-	dell_xps_2_lines = price_scrape.get_XPS_13_price()
+	#dell_xps_2_lines = price_scrape.get_XPS_13_price()
 	mac_15_2_lines = price_scrape.get_mac_15_price()
 	mac_13_2_lines = price_scrape.get_mac_13_price()
 
@@ -40,7 +40,7 @@ def create_text_body():
 	text_parts.append(phd_countdown)
 	text_parts.append('\n\n')
 	text_parts.append('Computer prices:\n')
-	text_parts.append(dell_xps_2_lines)
+	#text_parts.append(dell_xps_2_lines)
 	text_parts.append(mac_15_2_lines)
 	text_parts.append(mac_13_2_lines)
 	text_parts.append('\n\n')
@@ -74,10 +74,24 @@ def create_stock_graphs(message_body):
 	#progams to graph the stock dataframes.
 	#then compose the message from everything.
 	now_time = datetime.now()
-	start_time = datetime((now_time.year ), now_time.month - 1, now_time.day)
+	if now_time.month != 1:
+		start_time = datetime(now_time.year , now_time.month - 1, now_time.day)
+	else:
+		start_time = datetime(now_time.year -1 , 12, now_time.day)
 
-	#american stocks first
-	stocks_of_interest = ['AMZN','GOOG','AAPL','CLDR','HDP','ORCL','TSLA']
+	#american stocks first,
+	#then tsx stocks
+	canadian_stocks_of_interest = ['BEP.UN','EXE','FC','XWD','VCN','VFV','VUN']
+	for stock in canadian_stocks_of_interest:
+		#scrape the stock data to a df
+		price_df = stock_data.TSE_last_month_prices(stock)
+		#plot the stock df 
+		graph_of_close = stock_graph.plot_us_stock_data(price_df, stock)
+		#take the plot and add it to the email message
+		graph_to_message_body(graph_of_close, message_body)
+
+
+	stocks_of_interest = ['AMZN','GOOG','CLDR','HDP','ORCL','AAPL','MSFT','TSLA']
 	for stock in stocks_of_interest:
 		#scrape the stock data to a df
 		stock_df = stock_data.get_american_stock_dat(stock,start_time, now_time )
@@ -86,20 +100,8 @@ def create_stock_graphs(message_body):
 		#take the plot and add it to the email message
 		graph_to_message_body(graph_of_close, message_body)
 
-	#then tsx stocks
-	canadian_stocks_of_interest = ['BEP.UN','EXE','FC','TXF','XWD','VCN','VFV','VUN']
-
-	for stock in canadian_stocks_of_interest:
-		now = stock_data.TSE_current_price(stock)
-		stock_prices.append(now)
-		#scrape the stock data to a df
-		price_df = stock_data.TSE_last_month_prices(stock)
-		#plot the stock df 
-		graph_of_close = stock_graph.plot_cad_stock_data(price_df, stock)
-		#take the plot and add it to the email message
-		graph_to_message_body(graph_of_close, message_body)
-
 	return message_body
+
 
 
 
