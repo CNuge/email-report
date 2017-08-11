@@ -58,30 +58,35 @@ def TSE_last_month_prices(stock):
 	return outdat
 
 def international_last_month_prices(market, stock):
-    """ return a historical stock dataframe for any market and any stock """
-    google_historical_price_site= 'https://www.google.ca/finance/historical?q='
-    historical_price_page = google_historical_price_site+market+'%3A'+stock
-    stock_dat = urlopen(historical_price_page)
-    #then parse the table with BS 
-    historical_page = BeautifulSoup(stock_dat,'lxml')
-    table_dat = historical_page.find('table',{'class':'gf-table historical_price'})
-    rows = table_dat.findAll('td',{'class':'lm'})
-    dates = [x.get_text().rstrip() for x in rows]
-    #get datetime formatted dates
-    datetime_dates = [datetime.strptime(x, '%b %d, %Y') for x in dates]
-    prices = []
-    #iterate and grab column data
-    for num, row in enumerate(rows):
-        row_dat = [datetime_dates[num]] #first column is the dates
-        for i in row.next_siblings: 
-            row_dat.append(i.get_text().rstrip()) 
-        prices.append(row_dat) #add the row to the list of rows
-    outdat = DataFrame(prices,columns = ['Date','Open','High','Low','Close','Volume'])
-    #cleanup, set index and make volume integers
-    outdat["Volume"] = outdat["Volume"].apply(lambda x: int(x.replace(',','')))
-    outdat.set_index('Date')
-    return outdat
-    
+	""" return a historical stock dataframe for any market and any stock """
+	google_historical_price_site= 'https://www.google.ca/finance/historical?q='
+	historical_price_page = google_historical_price_site+market+'%3A'+stock
+	stock_dat = urlopen(historical_price_page)
+	#then parse the table with BS 
+	historical_page = BeautifulSoup(stock_dat,'lxml')
+	table_dat = historical_page.find('table',{'class':'gf-table historical_price'})
+	rows = table_dat.findAll('td',{'class':'lm'})
+	dates = [x.get_text().rstrip() for x in rows]
+	#get datetime formatted dates
+	datetime_dates = [datetime.strptime(x, '%b %d, %Y') for x in dates]
+	prices = []
+	#iterate and grab column data
+	for num, row in enumerate(rows):
+		row_dat = [datetime_dates[num]] #first column is the dates
+		for i in row.next_siblings: 
+			row_dat.append(i.get_text().rstrip()) 
+		prices.append(row_dat) #add the row to the list of rows
+	outdat = DataFrame(prices,columns = ['Date','Open','High','Low','Close','Volume'])
+	#cleanup, set index and make volume integers
+	outdat["Volume"] = outdat["Volume"].apply(lambda x: int(x.replace(',','')))
+	#change the other columns to floating point values
+	for col in ['Open','High','Low','Close']:
+		outdat[col] = outdat[col].apply(lambda x: float(x))
+	outdat = outdat.set_index('Date')
+	outdat = outdat.sort_index() #sort the index so it is oldest to newest
+	return outdat
+
+
 if __name__ == '__main__':
 
 	now_time = datetime.now()
