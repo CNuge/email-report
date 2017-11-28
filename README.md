@@ -35,3 +35,4 @@ Then to run the program all you need to do is:
 	python email_me.py
 	
 The program will then scrape all the necessary data, build the required graphs and send you an email!
+I set this up using a cron shell script so that it auto-runs on AWS every weekday morning, and then I get my morning report automatically!
