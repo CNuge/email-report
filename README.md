@@ -11,10 +11,10 @@ Things the program does:
 	
 	Please note: scraping stock data is a changing landscape, Yahoo Finance is once
 	again working, but I use the old code I wrote here mainly as a test to see how
-	long the beautiful soup scraper can run before it breaks
+	long the beautiful soup scraper can run before it breaks!
 
 2. price_scrape module looks up the prices of some laptops that I'm interested in,
-	so I can see if they go on sale. note it uses the canadian prices and the 
+	so I can see if they go on sale. Note: it uses the canadian prices and the 
 	education prices for apple (as I'm a student and need them discounts).
 
 3. game_scores.py looks up the blue jays score from yesterday and tells me if they won, lost, or didn't play.
