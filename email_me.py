@@ -33,9 +33,11 @@ msg = compose_message.create_stock_graphs(msg)
 """ look at the docs here, see if you can change the 'plain' to alter the format """	
 
 
-""" connect to the gmail server, send the email """
-""" note you've gotta change the email account's
-	settings to allow unsecure access """
+""" connect to the gmail server, send the email 
+	note you've gotta change the email account's
+	settings to allow unsecure access 
+	I would recommend a new dummy email account to send the
+	report from!"""
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
 server.login(fromaddr, password)
