@@ -14,23 +14,23 @@ The repository is set up in a modular fashion so you can easily substitute in yo
 
 ## How do I make it work?
 To get the report up and running there are a few steps you need to follow:
-1. You need an email accoun to send the report from
+### 1. You need an email accoun to send the report from
 	- I recommend signing up for a new gmail account for this purpose because you must allow unsecure access on the account (a no no for your main email!)
 	- After you get a new gmail, go to the 'sign in and security' page and toggle the 'allow less secure apps' to ON. This lets the python script send and email through the account
-2. Open `email_me.py`
+### 2. Open `email_me.py`
 	- On line 11 put change the string to the email address you will be sending FROM
 	- On line 12 put the password for the sending email address
 	- On line 13 put the email address you are sending the message TO
 	NOTE: If you didn't use gmail, you must change the server name on line 33 to match your email host. Just google 'hostname smtp server' and you can figure this out easily.
-3. Figure out what you want in your report!
+### 3. Figure out what you want in your report!
 	- Write some modules to scrape data from the web, provide you with links to interesting news articles, or whatever else you would like!
 	- Write the code in functions so that they can be imported into the `compose_message.py` file and run automatically
 	- When you write these modules, place them in the `message` folder
 	- I have included two example modules to get you started. Information on them can be found in posts [here](https://camnugent.wordpress.com/2017/08/09/139/) and [here](https://camnugent.wordpress.com/2017/10/29/ttib-a-set-of-countdowns-using-python-datetime-morning-report-pt-4/)
-4. Link the report functions to the `compose_message.py` file
+### 4. Link the report functions to the `compose_message.py` file
 	- This file is called to build the body of the message for the email.
 	- There are annotations within the file to help you import and run your custom functions
-5. Test it out!
+### 5. Test it out!
 	- You will likely need to tweak the message contents to get it looking how you want.
 	- A few test calls of `email_me.py` will show you the output and help with spacing, newlines etc.
 	- You can add new modules and import them into `compose_message.py` whenever you like, so you can easily change the report over time!
@@ -38,7 +38,7 @@ To get the report up and running there are a few steps you need to follow:
 ```
 	python email_me.py
 ```
-6. Run it automatically
+### 6. Run it automatically
 	- you can set the message up to auto send!
 	- On mac/linux the easiest way to do this is [cron](https://en.wikipedia.org/wiki/Cron)
 	- from command line type `crontab -e`
