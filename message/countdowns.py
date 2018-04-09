@@ -13,14 +13,7 @@ def day_of_year(now=datetime.now()):
 	return date_summary
 
 def time_alive(now=datetime.now()):
-	your_life = now - datetime("*******")
+	your_life = now - datetime(1970, 1, 1)
 	len_existence = 'Today is day number %d of your life.\n' % (your_life.days)
 	return len_existence
-
-
-def phd_countdown(now = datetime.now()):
-	finish_phd = datetime("*******")
-	days_to_go = finish_phd - now
-	get_er_done = 'You have %d days to finish your phd! Get to work.\n' % (days_to_go.days)
-	return get_er_done
 

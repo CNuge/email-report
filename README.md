@@ -1,88 +1,60 @@
-# Cam's Morning report
+# Customize a scheduled email report
+
+### A python template to help you get started a custom email report up and running.
+
+The repository is set up in a modular fashion so you can easily substitute in your own email address and report contents. I have personally found this to be a fun use for custom web scrapers that grab information off the internet and add it to the report.
+
+## What is in the repository?
+`email_me.py`			- this is the executable file that will initiate the message composition and send the email
+`message` folder
+	`compose_message.py`- this file calls the message modules and composes the text of the message
+	`game_scores.py`	- example module: this is a web scraper module. It acquires baseball scores from games played last night. [Look here for more info on the contents.](https://camnugent.wordpress.com/2017/08/09/139/)
+	`countdowns.py` 	- example module: this is a series of simple countdowns. [Look here for more info on the contents.](https://camnugent.wordpress.com/2017/10/29/ttib-a-set-of-countdowns-using-python-datetime-morning-report-pt-4/)
 
 
-
-goal: take the existing email notification repository and update it for other people
-to use
-
-Current flat file structure:
-| morning_report
-	stock_graph.py
-	stock_data.py
-	README.md
-	price_scrape.py
-	LICENSE
-	game_scores.py
-	email_me.py
-	countdowns.py
-	compose_message.py
-
-Want to change it to the following:
-
-| email_report
-	README.md
-	LICENSE
-	email_me.py
-	| message
-		__init__.py
-		compose_message.py
-		example_countdowns.py
-		example_game_scores.py
-
-Write the readme so it explains to people how to do the following:
-1. Hook the email_me.py up to their own email so it will send
-2. write new data scrapers or countdowns and add them to the message folder
-3. alter the compose message to import and use the new message components
-4. Give a description of how you can have the message auto send
-	crontab -e
-	Then you want to add:
-
-	0 5 * * 1-5 python email_me.py
-
-make the readme descriptive enough for others to alter the program. Encourage others this
-is a fun way to practice and apply some simple web scrpaing tasks. Easy to change
-and very customizable. 
-
-
-
-
-
-
-
-
-This is a program that sends me a few pieces of information in the morning 
-when I wake up. It is modular, so new information sources can be created,
-and then added to the 'compose_message.py' functions, which run all the other
-modules and compose the final body of the text.
-
-Things the program does:
-1. The 'stock_data' and 'stock_graph' modules contain code that goes to google
-	finance and pulls the last 30 days worth of prices and stores them in a pandas dataframe.
-	
-	Please note: scraping stock data is a changing landscape, Yahoo Finance is once
-	again working, but I use the old code I wrote here mainly as a test to see how
-	long the beautiful soup scraper can run before it breaks!
-
-2. price_scrape module looks up the prices of some laptops that I'm interested in,
-	so I can see if they go on sale. Note: it uses the canadian prices and the 
-	education prices for apple (as I'm a student and need them discounts).
-
-3. game_scores.py looks up the blue jays score from yesterday and tells me if they won, lost, or didn't play.
-
-4. countdowns.py just gives me a few fun facts to start my day (based on the datetime module).
-
-## To run this program:
-You need to hook it up to an email address in the email_me.py file (so that it can send the message from somewhere). These fields are currently stars so that you can't get into my email.
-
-With an email set up you need the following installed:
-
-	pip install pandas
-	pip install bs4 #BeautifulSoup
-	pip install ggplot
-
-Then to run the program all you need to do is:
-
+## How do I make it work?
+To get the report up and running there are a few steps you need to follow:
+1. You need an email accoun to send the report from
+	- I recommend signing up for a new gmail account for this purpose because you must allow unsecure access on the account (a no no for your main email!)
+	- After you get a new gmail, go to the 'sign in and security' page and toggle the 'allow less secure apps' to ON. This lets the python script send and email through the account
+2. Open `email_me.py`
+	- On line 11 put change the string to the email address you will be sending FROM
+	- On line 12 put the password for the sending email address
+	- On line 13 put the email address you are sending the message TO
+	NOTE: If you didn't use gmail, you must change the server name on line 33 to match your email host. Just google 'hostname smtp server' and you can figure this out easily.
+3. Figure out what you want in your report!
+	- Write some modules to scrape data from the web, provide you with links to interesting news articles, or whatever else you would like!
+	- Write the code in functions so that they can be imported into the `compose_message.py` file and run automatically
+	- When you write these modules, place them in the `message` folder
+	- I have included two example modules to get you started. Information on them can be found in posts [here](https://camnugent.wordpress.com/2017/08/09/139/) and [here](https://camnugent.wordpress.com/2017/10/29/ttib-a-set-of-countdowns-using-python-datetime-morning-report-pt-4/)
+4. Link the report functions to the `compose_message.py` file
+	- This file is called to build the body of the message for the email.
+	- There are annotations within the file to help you import and run your custom functions
+5. Test it out!
+	- You will likely need to tweak the message contents to get it looking how you want.
+	- A few test calls of `email_me.py` will show you the output and help with spacing, newlines etc.
+	- You can add new modules and import them into `compose_message.py` whenever you like, so you can easily change the report over time!
+	- After setup, all you need to run the program is:
+```
 	python email_me.py
+```
+6. Run it automatically
+	- you can set the message up to auto send!
+	- On mac/linux the easiest way to do this is [cron](https://en.wikipedia.org/wiki/Cron)
+	- from command line type `crontab -e`
+	- then add a command to schedule execution. For example: to send the email report at 6am on Monday-Friday on my computer I add the command: `0 6 * * 1-5 python /Users/Cam/bin/email_me.py`
+	- Here is the general syntax for scheduling the job so that you can get it running at the time you want:
+```
+*     *     *   *    *        python ./email_me.py
+-     -     -   -    -
+|     |     |   |    |
+|     |     |   |    +----- day of week (0 - 6) (Sunday=0)
+|     |     |   +------- month (1 - 12)
+|     |     +--------- day of        month (1 - 31)
+|     +----------- hour (0 - 23)
++------------- min (0 - 59)
+```
+
+Thats it! A simple template for a custom email report feel free to take this and use it yourself! I would love to hear about any interesting scrapers or data aggregation modules that you construct and run in this template!
+
 	
-The program will then scrape all the necessary data, build the required graphs and send you an email!
-I set this up using a cron shell script so that it auto-runs on AWS every weekday morning, and then I get my morning report automatically!

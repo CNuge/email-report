@@ -1,18 +1,15 @@
+""" This function call all of the other functions and composes the message body.
 
+if your custom report modules are in the message folder, then the following import syntax will work:
+import message.YourFile as YourFile
 
+You can then call your functions inside the create_text_body() function using the syntax: 
+YourFile.YourFunction()
 
-""" this will call all of the other functions, and compose the message
-	the output of this function can then be sent via email to meself"""
-
-# if your custom report modules are in the message folder, then the following
-# import syntax will work
-# import message.YourFile as YourFile
-# then you can call your functions here using: YourFile.YourFunction()
-
+"""
 import message.countdowns as countdowns		#DEMO
 import message.game_scores as game_scores	#DEMO
-
-
+#from
 
 def create_text_body():
 	""" Call the functions that compose the email, building up the body
@@ -24,7 +21,6 @@ def create_text_body():
 		substitute in your custom report functions here! """
 	day_of_the_year = countdowns.day_of_year()	#DEMO
 	day_of_my_life = countdowns.time_alive()	#DEMO
-	phd_countdown = countdowns.phd_countdown()	#DEMO
 	jays_game = game_scores.get_team_result_text('Toronto Blue Jays')	#DEMO
 
 
