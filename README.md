@@ -4,15 +4,12 @@
 The repository is set up in a modular fashion so you can easily substitute in your own email address and report contents. I have personally found this to be a fun use for custom web scrapers that grab information off the internet and add it to the report.
 
 ## What is in the repository?
-`email_me.py`			- this is the executable file that will initiate the message composition and send the email
+`email_me.py` - this is the executable file that will initiate the message composition and send the email
 
-`message` folder
-
-	`compose_message.py`- this file calls the message modules and composes the text of the message
-
-	`game_scores.py`	- example module: this is a web scraper module. It acquires baseball scores from games played last night. [Look here for more info on the contents.](https://camnugent.wordpress.com/2017/08/09/139/)
-
-	`countdowns.py` 	- example module: this is a series of simple countdowns. [Look here for more info on the contents.](https://camnugent.wordpress.com/2017/10/29/ttib-a-set-of-countdowns-using-python-datetime-morning-report-pt-4/)
+`message` folder:
+- `compose_message.py`- this file calls the message modules and composes the text of the message
+- `game_scores.py`	- example module: this is a web scraper module. It acquires baseball scores from games played last night. [Look here for more info on the contents.](https://camnugent.wordpress.com/2017/08/09/139/)
+- `countdowns.py` 	- example module: this is a series of simple countdowns. [Look here for more info on the contents.](https://camnugent.wordpress.com/2017/10/29/ttib-a-set-of-countdowns-using-python-datetime-morning-report-pt-4/)
 
 
 ## How do I make it work?
