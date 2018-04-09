@@ -1,5 +1,55 @@
 # Cam's Morning report
 
+
+
+goal: take the existing email notification repository and update it for other people
+to use
+
+Current flat file structure:
+| morning_report
+	stock_graph.py
+	stock_data.py
+	README.md
+	price_scrape.py
+	LICENSE
+	game_scores.py
+	email_me.py
+	countdowns.py
+	compose_message.py
+
+Want to change it to the following:
+
+| email_report
+	README.md
+	LICENSE
+	email_me.py
+	| message
+		__init__.py
+		compose_message.py
+		example_countdowns.py
+		example_game_scores.py
+
+Write the readme so it explains to people how to do the following:
+1. Hook the email_me.py up to their own email so it will send
+2. write new data scrapers or countdowns and add them to the message folder
+3. alter the compose message to import and use the new message components
+4. Give a description of how you can have the message auto send
+	crontab -e
+	Then you want to add:
+
+	0 5 * * 1-5 python email_me.py
+
+make the readme descriptive enough for others to alter the program. Encourage others this
+is a fun way to practice and apply some simple web scrpaing tasks. Easy to change
+and very customizable. 
+
+
+
+
+
+
+
+
 This is a program that sends me a few pieces of information in the morning 
 when I wake up. It is modular, so new information sources can be created,
 and then added to the 'compose_message.py' functions, which run all the other
