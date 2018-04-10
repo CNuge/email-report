@@ -1,5 +1,5 @@
 # Customize a scheduled email report
-### A python template to help you get started a custom email report up and running.
+### A python template to help you get a custom email report up and running.
 
 The repository is set up in a modular fashion so you can easily substitute in your own email address and report contents. I have personally found this to be a fun use for custom web scrapers that grab information off the internet and add it to my report.
 
