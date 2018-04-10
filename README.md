@@ -55,6 +55,12 @@ python email_me.py
 +------------- min (0 - 59)
 ```
 
-Thats it! A simple template for a custom email report feel free to take this and use it yourself! I would love to hear about any interesting scrapers or data aggregation modules that you construct and run in this template!
+Thats it! A simple template for a custom email report. Feel free to take this and use it yourself! I would love to hear about any interesting scrapers or data aggregation modules that you construct and run in this template.
+
+### Dependencies
+
+The example we scraper `game_scores.py` uses the beautiful soup package. Besides that the repository is all python3 standard library.
+You can download beautiful soup using: `pip install bs4` 
+
 
 	
