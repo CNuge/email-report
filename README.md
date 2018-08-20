@@ -26,20 +26,20 @@ NOTE: If you didn't use gmail, you must change the server name on line 33 to mat
 - Write some modules to scrape data from the web, provide you with links to interesting news articles, or whatever else you would like!
 - Write the code in functions so that they can be imported into the `compose_message.py` file and run automatically.
 - When you write these modules, place them in the `message` folder.
-- I have included two example modules for inspiration. Information on what they do can be found in posts [here](https://camnugent.wordpress.com/2017/08/09/139/) and [here](https://camnugent.wordpress.com/2017/10/29/ttib-a-set-of-countdowns-using-python-datetime-morning-report-pt-4/)
+- I have included two example modules for inspiration. Information on what they do can be found in posts [here](https://camnugent.wordpress.com/2017/08/09/139/) and [here](https://camnugent.wordpress.com/2017/10/29/ttib-a-set-of-countdowns-using-python-datetime-morning-report-pt-4/).
 ### 4. Link the report functions to the `compose_message.py` file
 - This file is called to build the body of the message for the email. It imports the other modules in the message folder and calls the needed functions.
 - There are annotations within the file to help you import and run your custom functions.
-### 5. Test it out!
+### 5. Test it out
 - You will likely need to tweak the message contents to get it looking how you want.
 - A few test calls of `email_me.py` will show you the output and help with spacing, newlines etc.
-- You can add new modules and import them into `compose_message.py` whenever you like, so you can easily change the report over time!
+- You can add new modules and import them into `compose_message.py` whenever you like, so you can easily change the report over time.
 - After setup, all you need to run the program is:
 ```
 python email_me.py
 ```
 ### 6. Run it automatically
-- you can set the message up to auto send!
+- You can set the message up to auto send.
 - On mac/linux the easiest way to do this is [cron](https://en.wikipedia.org/wiki/Cron)
 - from command line type `crontab -e`
 - then add a command to schedule execution. For example: to send the email report at 6am on Monday-Friday on my computer I add the command: `0 6 * * 1-5 python /Users/Cam/bin/email_me.py`
@@ -54,6 +54,7 @@ python email_me.py
 |     +----------- hour (0 - 23)
 +------------- min (0 - 59)
 ```
+- If you want to get really fancy then set the program up to run in the cloud (on Amazon Web Servies, Google cloud etc.) and then you will be sent the report even if your computer is off.
 
 Thats it! A simple template for a custom email report. Feel free to take this and use it yourself! I would love to hear about any interesting scrapers or data aggregation modules that you construct and run in this template.
 
