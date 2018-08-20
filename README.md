@@ -1,7 +1,7 @@
 # Customize a scheduled email report
 ### A python template to help you get a custom email report up and running.
 
-The repository is set up in a modular fashion so you can easily substitute in your own email address and report contents. I have personally found this to be a fun use for custom web scrapers that grab information off the internet and add it to my report.
+The repository is set up in a modular fashion so you can easily substitute in your own email address and report contents. I have personally found this to be a fun use for custom web scrapers that grab information off the internet and add it to an email report I have sent to myself every morning.
 
 ## What is in the repository?
 `email_me.py` - This is the executable file that will initiate the message composition and send the email.
@@ -18,7 +18,7 @@ To get the report up and running there are a few steps you need to follow:
 - I recommend signing up for a new gmail account for this purpose. You must allow unsecure access on the account (a no no for your main email!)
 - After you get a new gmail, go to the 'sign in and security' page and toggle the 'allow less secure apps' option to ON. This lets the python script send an email through the account.
 ### 2. Open `email_me.py`
-- On line 11 put change the string to the email address you will be sending FROM.
+- On line 11 change the string to the email address you will be sending FROM.
 - On line 12 put the password for the sending email address.
 - On line 13 put the email address you are sending the message TO.
 NOTE: If you didn't use gmail, you must change the server name on line 33 to match your email host. Just google 'hostname smtp server' and you can figure this out easily.
