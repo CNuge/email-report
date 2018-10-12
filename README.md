@@ -60,7 +60,7 @@ Thats it! A simple template for a custom email report. Feel free to take this an
 
 ### Dependencies
 
-The example we scraper `game_scores.py` uses the beautiful soup package. Besides that the repository is all python3 standard library.
+The example web scraper `game_scores.py` uses the beautiful soup package. Besides that the repository is all python3 standard library.
 You can download beautiful soup using: `pip install bs4` 
 
 
