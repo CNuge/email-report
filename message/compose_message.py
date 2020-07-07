@@ -26,12 +26,12 @@ def create_text_body():
 
 	""" this section adds the strings to the message body
 		substitute in the strings you generate here! """
-	text_parts.append('Countdowns:\n')				#DEMO
+	body_string += 'Countdowns:\n'				#DEMO
 	body_string += day_of_the_year					#DEMO
 	body_string += day_of_my_life					#DEMO
 	body_string += '\n\n' #to add some separation	#DEMO
 
-	body_string += 'jays_game'						#DEMO
+	body_string += jays_game						#DEMO
 	body_string += '\n\n' #to add some separation	#DEMO
 	
 
